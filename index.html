@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>بطاقة لمعلمتي إلهام الرحيلي</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: "Tahoma", sans-serif;
+    background: linear-gradient(135deg, #fce4ec, #e3f2fd);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* البطاقة */
+.card {
+    background: white;
+    padding: 35px;
+    width: 420px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+    100% { transform: translateY(0px); }
+}
+
+h1 {
+    color: #e91e63;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 5px #e91e63; }
+    to { text-shadow: 0 0 25px #ff80ab; }
+}
+
+p {
+    line-height: 1.9;
+    color: #444;
+}
+
+/* القلوب */
+.heart {
+    position: absolute;
+    animation: rise 6s linear infinite;
+}
+
+@keyframes rise {
+    0% { transform: translateY(0); opacity:1; }
+    100% { transform: translateY(-900px); opacity:0; }
+}
+
+/* شاشة البداية */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, #e91e63, #2196f3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    z-index: 10;
+}
+
+button {
+    margin-top: 20px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    background: white;
+    color: #e91e63;
+    font-size: 16px;
+    cursor: pointer;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- شاشة البداية -->
+<div class="overlay" id="overlay">
+    <h2>📩 لديك بطاقة جديدة</h2>
+    <button onclick="openCard()">فتح البطاقة</button>
+</div>
+
+<!-- البطاقة -->
+<div class="card" id="card" style="display:none;">
+    <h1>إلى معلمتي إلهام الرحيلي 🌸</h1>
+
+    <p>
+        أبعث إليكِ أسمى آيات الشكر والتقدير،  
+        لما قدمتِه من علمٍ وعطاءٍ لا ينضب.  
+        <br><br>
+        كنتِ لنا نورًا يضيء الطريق،  
+        وقدوةً في الأخلاق والعلم.  
+        <br><br>
+        أسأل الله أن يبارك فيكِ ويجزيكِ خير الجزاء 🤍
+    </p>
+
+    <div style="margin-top:20px;font-weight:bold;">
+        من الطالب / إلياس الحربي
+    </div>
+</div>
+
+<script>
+function openCard(){
+    document.getElementById("overlay").style.display="none";
+    document.getElementById("card").style.display="block";
+}
+
+/* قلوب */
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.fontSize = (10 + Math.random() * 25) + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+}
+setInterval(createHeart, 400);
+</script>
+
+</body>
+</html>
