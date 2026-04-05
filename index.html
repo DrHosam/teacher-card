@@ -2,13 +2,14 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-
-<!-- مهم جدًا للجوال -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>بطاقة لمعلمتي إلهام الرحيلي</title>
 
 <style>
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     font-family: "Tahoma", sans-serif;
@@ -16,8 +17,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     overflow: hidden;
+    position: relative;
 }
 
 /* شاشة البداية */
@@ -30,133 +32,159 @@ body {
     align-items: center;
     flex-direction: column;
     color: white;
-    z-index: 10;
+    z-index: 20;
+    text-align: center;
+    padding: 20px;
 }
 
 .overlay h2 {
-    font-size: 28px;
+    font-size: 34px;
+    margin: 0;
 }
 
-button {
-    margin-top: 20px;
-    padding: 14px 30px;
+.open-btn {
+    margin-top: 24px;
+    padding: 16px 34px;
     border: none;
     border-radius: 30px;
     background: white;
     color: #e91e63;
-    font-size: 18px;
+    font-size: 22px;
     cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
 
 /* البطاقة */
 .card {
     background: white;
-    padding: 50px;
-    width: 90vw;
-    max-width: 700px;
-    border-radius: 30px;
+    width: 96vw;              /* أكبر عرض */
+    height: 88vh;             /* أكبر ارتفاع */
+    padding: 40px 28px;
+    border-radius: 32px;
     text-align: center;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.28);
     animation: float 4s ease-in-out infinite;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* منع صغر الحجم على الشاشات الكبيرة */
+@media (min-width: 768px) {
+    .card {
+        width: 85vw;
+        height: 82vh;
+        max-width: 900px;
+        max-height: 760px;
+        padding: 60px 50px;
+    }
 }
 
 @keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-15px); }
+    0%   { transform: translateY(0px); }
+    50%  { transform: translateY(-12px); }
     100% { transform: translateY(0px); }
 }
 
-/* العنوان */
 h1 {
-    font-size: 32px;
+    font-size: clamp(32px, 5vw, 54px);
     color: #e91e63;
+    margin: 0 0 28px 0;
     animation: glow 2s infinite alternate;
+    line-height: 1.5;
 }
 
 @keyframes glow {
     from { text-shadow: 0 0 5px #e91e63; }
-    to { text-shadow: 0 0 25px #ff80ab; }
+    to   { text-shadow: 0 0 25px #ff80ab; }
 }
 
-/* النص */
 p {
-    font-size: 20px;
+    font-size: clamp(22px, 3.8vw, 34px);
     line-height: 2;
     color: #444;
+    margin: 0;
+    max-width: 95%;
 }
 
-/* التوقيع */
 .signature {
-    font-size: 22px;
-    margin-top: 30px;
+    font-size: clamp(24px, 4vw, 36px);
+    margin-top: 34px;
     font-weight: bold;
+    color: #222;
 }
 
-/* القلوب */
+/* قلوب متحركة */
 .heart {
     position: absolute;
-    animation: rise 6s linear infinite;
+    animation: rise 6s linear forwards;
+    pointer-events: none;
+    z-index: 1;
 }
 
 @keyframes rise {
     0% {
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
         opacity: 1;
     }
     100% {
-        transform: translateY(-1000px);
+        transform: translateY(-110vh) scale(1.5);
         opacity: 0;
     }
 }
-</style>
 
+/* محتوى البطاقة فوق القلوب */
+.card > * {
+    position: relative;
+    z-index: 2;
+}
+</style>
 </head>
 
 <body>
 
-<!-- شاشة البداية -->
 <div class="overlay" id="overlay">
     <h2>📩 لديك بطاقة جديدة</h2>
-    <button onclick="openCard()">فتح البطاقة</button>
+    <button class="open-btn" onclick="openCard()">فتح البطاقة</button>
 </div>
 
-<!-- البطاقة -->
 <div class="card" id="card" style="display:none;">
-
     <h1>إلى معلمتي إلهام الرحيلي 🌸</h1>
 
     <p>
-        أبعث إليكِ أسمى آيات الشكر والتقدير،  
-        لما قدمتِه من علمٍ نافع وعطاءٍ لا ينضب.  
-        <br><br>
-        كنتِ لنا نورًا يضيء الطريق،  
-        وقدوةً في الأخلاق والعلم.  
-        <br><br>
+        أبعث إليكِ أسمى آيات الشكر والتقدير،<br>
+        لما قدمتِه من علمٍ نافع وعطاءٍ لا ينضب.<br><br>
+        كنتِ لنا نورًا يضيء الطريق،<br>
+        وقدوةً في الأخلاق والعلم.<br><br>
         أسأل الله أن يبارك فيكِ ويجزيكِ خير الجزاء 🤍
     </p>
 
     <div class="signature">
         من الطالب / إلياس الحربي
     </div>
-
 </div>
 
 <script>
-function openCard(){
+function openCard() {
     document.getElementById("overlay").style.display = "none";
-    document.getElementById("card").style.display = "block";
+    document.getElementById("card").style.display = "flex";
 }
 
-/* قلوب متحركة */
 function createHeart() {
     const heart = document.createElement("div");
-    heart.classList.add("heart");
+    heart.className = "heart";
     heart.innerHTML = "❤️";
     heart.style.left = Math.random() * window.innerWidth + "px";
-    heart.style.fontSize = (15 + Math.random() * 25) + "px";
+    heart.style.bottom = "-20px";
+    heart.style.fontSize = (18 + Math.random() * 28) + "px";
     document.body.appendChild(heart);
 
-    setTimeout(() => heart.remove(), 6000);
+    setTimeout(() => {
+        heart.remove();
+    }, 6000);
 }
 
 setInterval(createHeart, 300);
